@@ -2,6 +2,9 @@
 
 namespace Demo.Entities
 {
+    /// <summary>
+    /// catalog product
+    /// </summary>
     public class Product
     {
         [Required]

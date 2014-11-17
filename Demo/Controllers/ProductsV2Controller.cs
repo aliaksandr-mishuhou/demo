@@ -18,7 +18,7 @@ namespace Demo.Controllers
     */
     public class ProductsV2Controller : ODataController
     {
-        private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
+        private static readonly ODataValidationSettings ValidationSettings = new ODataValidationSettings();
 
         // GET: odata/ODataProducts
         public IHttpActionResult GetODataProducts(ODataQueryOptions<Product> queryOptions)
@@ -26,7 +26,7 @@ namespace Demo.Controllers
             // validate the query.
             try
             {
-                queryOptions.Validate(_validationSettings);
+                queryOptions.Validate(ValidationSettings);
             }
             catch (ODataException ex)
             {
@@ -43,7 +43,7 @@ namespace Demo.Controllers
             // validate the query.
             try
             {
-                queryOptions.Validate(_validationSettings);
+                queryOptions.Validate(ValidationSettings);
             }
             catch (ODataException ex)
             {

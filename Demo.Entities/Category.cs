@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Demo.Entities
 {
+    /// <summary>
+    /// catalog category
+    /// </summary>
     public class Category
     {
         [Required]
