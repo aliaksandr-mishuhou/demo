@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Shop</title>
+</head>
+<body>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.getJSON("api/categories")
+                .done(function (data) {
+                    $.each(data, function (key, item) {
+                        buildCategory(item, "#categories");
+                    });
+                    $(".category").click(function () {
+                        var categoryId = $(this).data("id");
+                        loadProducts(categoryId);
+                    });
+            });
+
+        });
+
+        function buildCategory(item, root) {
+            var elem = $('<li>', { text: formatCategory(item) }).attr("data-id", item.Id).attr("class", "category").appendTo($(root));
+            if (item.Children != null) {
+                $.each(item.Children, function (key, childItem) {
+                    var childrenRoot = $("<ul>").appendTo(elem);
+                    buildCategory(childItem, childrenRoot);
+                });
+            }
+        }
+
+        function formatCategory(item) {
+            var s = item.Name + "(" + (item.Children ? item.Children.length : 0).toString() + ")";
+            return s;
+        }
+
+        function loadProducts(categoryId) {
+            $('#products').empty();
+            $.getJSON("api/products/findByCategory/" + categoryId)
+                .done(function (data) {
+                    $.each(data, function (key, item) {
+                        $('<li>', { text: formatProduct(item) }).appendTo($('#products'));
+                    });
+                });
+        }
+
+        function formatProduct(item) {
+            return item.Name + " - $" + item.Price;
+        }
+
+    </script>
+    
+    <h2>Categories:</h2>
+    <ul id="categories">
+    </ul>
+    
+    <h2>Products:</h2>
+    <ul id="products">
+    </ul>
+
+</body>
+</html>
