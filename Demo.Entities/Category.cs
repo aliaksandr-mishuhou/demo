@@ -8,6 +8,7 @@ namespace Demo.Entities
     /// </summary>
     public class Category
     {
+
         [Required]
         public int Id { get; set; }
 
