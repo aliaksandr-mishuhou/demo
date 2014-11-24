@@ -7,6 +7,7 @@ namespace Demo.BusinessServices.Impl
     public class Shop : IShop
     {
 
+
         #region data
 
         private readonly List<Category> _categories = new List<Category>
