@@ -8,5 +8,6 @@ namespace Demo.BusinessServices
         IEnumerable<Category> GetCategories();
         IEnumerable<Product> GetProducts(int categoryId);
         Product GetProduct(int productId);
+
     }
 }
